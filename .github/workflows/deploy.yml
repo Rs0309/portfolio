@@ -25,10 +25,20 @@ jobs:
           pip install frozen-flask
           pip list
 
+      - name: Create build directory
+        run: |
+          mkdir -p build
+          ls -la
+
       - name: Build static files
         run: |
           python freeze.py
+          echo "Contents of build directory:"
           ls -la build/
+          if [ ! -f "build/index.html" ]; then
+            echo "Error: index.html not found in build directory"
+            exit 1
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -36,4 +46,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           publish_branch: main
-          force_orphan: true 
+          force_orphan: true
+          commit_message: "Deploy: ${{ github.event.head_commit.message }}" 
