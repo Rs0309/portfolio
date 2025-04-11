@@ -47,6 +47,8 @@ jobs:
           ls -la static/
           echo "Static/images directory:"
           ls -la static/images/
+          echo "Image file details:"
+          file static/images/profile.jpg
 
       - name: Create build directory structure
         run: |
@@ -68,15 +70,15 @@ jobs:
       - name: Copy static files
         run: |
           echo "Copying static files..."
-          cp -r static/images/* build/static/images/ || true
-          cp -r static/css build/static/ || true
-          cp -r static/js build/static/ || true
+          echo "Source image path:"
+          ls -la static/images/profile.jpg
+          cp -v static/images/profile.jpg build/static/images/
+          echo "Destination image path:"
+          ls -la build/static/images/profile.jpg
           echo "Contents of build/static directory:"
           ls -la build/static/
           echo "Contents of build/static/images directory:"
           ls -la build/static/images/
-          echo "Verifying image exists:"
-          ls -la build/static/images/profile.jpg
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
