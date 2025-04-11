@@ -34,10 +34,10 @@ jobs:
           echo "Static directory:"
           ls -la static/
 
-      - name: Create build directory
+      - name: Create build directory structure
         run: |
-          mkdir -p build
-          ls -la
+          mkdir -p build/static
+          ls -la build/
 
       - name: Build static files
         run: |
@@ -54,7 +54,8 @@ jobs:
       - name: Copy static files
         run: |
           echo "Copying static files..."
-          cp -r static/* build/static/
+          cp -r static/* build/static/ || true
+          echo "Contents of build/static directory:"
           ls -la build/static/
 
       - name: Deploy to GitHub Pages
