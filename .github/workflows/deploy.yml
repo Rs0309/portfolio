@@ -68,11 +68,15 @@ jobs:
       - name: Copy static files
         run: |
           echo "Copying static files..."
-          cp -r static/* build/static/ || true
+          cp -r static/images/* build/static/images/ || true
+          cp -r static/css build/static/ || true
+          cp -r static/js build/static/ || true
           echo "Contents of build/static directory:"
           ls -la build/static/
           echo "Contents of build/static/images directory:"
           ls -la build/static/images/
+          echo "Verifying image exists:"
+          ls -la build/static/images/profile.jpg
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
