@@ -38,6 +38,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Next.js specific
+.next-swc/
+*.node
+.next/cache/
+.next/standalone/
+
 # IDE
 .idea/
 .vscode/
@@ -46,4 +52,13 @@ yarn-error.log*
 
 # OS
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Large binary files
+*.bin
+*.dat
+*.exe
+*.dll
+*.so
+*.dylib
+*.node 
