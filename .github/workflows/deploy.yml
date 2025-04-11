@@ -51,6 +51,12 @@ jobs:
             exit 1
           fi
 
+      - name: Copy static files
+        run: |
+          echo "Copying static files..."
+          cp -r static/* build/static/
+          ls -la build/static/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

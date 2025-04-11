@@ -9,3 +9,4 @@ def index():
 
 if __name__ == '__main__':
     freezer.freeze()
+    print("Freezing complete. Static files have been generated.")
