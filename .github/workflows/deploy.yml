@@ -25,6 +25,15 @@ jobs:
           pip install frozen-flask
           pip list
 
+      - name: Debug directory structure
+        run: |
+          echo "Current directory structure:"
+          ls -la
+          echo "Templates directory:"
+          ls -la templates/
+          echo "Static directory:"
+          ls -la static/
+
       - name: Create build directory
         run: |
           mkdir -p build
@@ -32,11 +41,13 @@ jobs:
 
       - name: Build static files
         run: |
+          echo "Running freeze.py..."
           python freeze.py
           echo "Contents of build directory:"
           ls -la build/
           if [ ! -f "build/index.html" ]; then
             echo "Error: index.html not found in build directory"
+            ls -la build/
             exit 1
           fi
 
