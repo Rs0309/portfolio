@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -21,13 +23,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install frozen-flask
+          pip list
 
       - name: Build static files
         run: |
           python freeze.py
+          ls -la build/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build 
+          publish_dir: ./build
+          publish_branch: gh-pages
+          force_orphan: true 
